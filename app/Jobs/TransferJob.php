@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Notifications\DepositNotification;
+use App\Notifications\WithdrawalNotification;
 use App\Repositories\IAccountRepository;
 use App\Repositories\ICardRepository;
 use App\Repositories\ITransactionRepository;
@@ -10,9 +12,11 @@ use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 use Illuminate\Validation\ValidationException as ValidationValidationException;
 use PhpParser\Node\Expr\Throw_;
 use Throwable;
@@ -48,18 +52,21 @@ class TransferJob
                     $this->throwValidation('source', ['cant be same account with destination!']);
                 }
                 if ($sourceAccount->ballance < $this->amount + $transaction_fee) {
-                    $this->throwValidation('source', ['Insufficent ballance!']);
+                    $this->throwValidation('source', ['Insufficient ballance!']);
                 }
                 $sourceAccount->lockForUpdate();
                 $destAccount->lockForUpdate();
                 $sourceAccount->ballance -= $this->amount;
                 $destAccount->ballance += $this->amount;
                 $sourceAccount->ballance -= $transaction_fee;
-                $transactionRepository->createTransaction($sourceCard->id, $destCard->id, $this->amount, $transaction_fee);
+                $transaction = $transactionRepository->createTransaction($sourceCard->id, $destCard->id, $this->amount, $transaction_fee);
                 $sourceAccount->save();
                 $destAccount->save();
             }
             DB::commit();
+            FacadesNotification::sendNow($sourceAccount->user()->first(), new WithdrawalNotification($transaction));
+            FacadesNotification::sendNow($destAccount->user()->first(), new DepositNotification($transaction));
+
             return 'done!';
         } catch (Exception | Throwable $e) {
             DB::rollBack();
