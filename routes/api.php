@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/transfer', [TransferController::class, 'transfer']);
-Route::post('/report', [ReportController::class, 'transfer']);
+Route::get('/report', [ReportController::class, 'latest']);

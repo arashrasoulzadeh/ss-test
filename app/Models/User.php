@@ -43,4 +43,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $with = ['accounts'];
+
+    // User.php (User model)
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
 }
