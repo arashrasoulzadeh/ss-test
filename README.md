@@ -20,3 +20,6 @@ or you may run test using :
 ```
 php artisan test
 ```
+
+
+you may set notification channel with `NOTIFICATION_CHANNEL=kavenegar` in you env, you may also use `NOTIFICATION_CHANNEL=ghasedak`
