@@ -1,5 +1,6 @@
 <?php
 
+use App\Channels\GhasedakChannel;
 use App\Channels\KavenegarChannel;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
@@ -186,6 +187,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
-    'channel' => KavenegarChannel::class
+    'channel' => ['kavenegar' => KavenegarChannel::class, 'ghasedak' => GhasedakChannel::class][env('NOTIFICATION_CHANNEL', 'kavenegar')]
 
 ];

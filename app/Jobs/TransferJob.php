@@ -43,7 +43,7 @@ class TransferJob
             $transactionRepository = app()->make(ITransactionRepository::class);
             $sourceCard = $cardRepository->getCardByNumber($this->source);
             $destCard = $cardRepository->getCardByNumber($this->destination);
-            $transaction_fee = 2;
+            $transaction_fee = 500;
             if ((!is_null($sourceCard)) && (!is_null($destCard))) {
                 $sourceAccount = $sourceCard->account;
                 $destAccount = $destCard->account;
@@ -64,8 +64,8 @@ class TransferJob
                 $destAccount->save();
             }
             DB::commit();
-            FacadesNotification::sendNow($sourceAccount->user()->first(), new WithdrawalNotification($transaction));
-            FacadesNotification::sendNow($destAccount->user()->first(), new DepositNotification($transaction));
+            FacadesNotification::send($sourceAccount->user()->first(), new WithdrawalNotification($transaction));
+            FacadesNotification::send($destAccount->user()->first(), new DepositNotification($transaction));
 
             return 'done!';
         } catch (Exception | Throwable $e) {

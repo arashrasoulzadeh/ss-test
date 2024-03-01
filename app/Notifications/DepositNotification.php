@@ -38,11 +38,7 @@ class DepositNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [
-            'انتقال انجام شد' .
-                ' \n ' .
-                ($this->transaction->amount + $this->transaction->fee) .
-                ' از حساب شما کسر شد. '
-        ];
+        $amount = $this->transaction->amount + $this->transaction->fee;
+        return ['message' => "انتقال انجام شد\n$amount از حساب شما کسر شد."];
     }
 }
