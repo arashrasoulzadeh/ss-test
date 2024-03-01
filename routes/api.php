@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\TransferControllre;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TransferController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/transfer', [TransferControllre::class, 'transfer']);
+Route::post('/transfer', [TransferController::class, 'transfer']);
+Route::post('/report', [ReportController::class, 'transfer']);

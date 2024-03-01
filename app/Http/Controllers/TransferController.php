@@ -6,7 +6,7 @@ use App\Http\Requests\TransferRequest;
 use App\Jobs\TransferJob;
 use Illuminate\Http\Request;
 
-class TransferControllre extends Controller
+class TransferController extends Controller
 {
     public function transfer(TransferRequest $request)
     {
