@@ -4,21 +4,11 @@ namespace App\Jobs;
 
 use App\Notifications\DepositNotification;
 use App\Notifications\WithdrawalNotification;
-use App\Repositories\IAccountRepository;
 use App\Repositories\ICardRepository;
 use App\Repositories\ITransactionRepository;
-use Dotenv\Exception\ValidationException;
 use Exception;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
-use Illuminate\Validation\ValidationException as ValidationValidationException;
-use PhpParser\Node\Expr\Throw_;
 use Throwable;
 
 class TransferJob
