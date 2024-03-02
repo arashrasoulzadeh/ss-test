@@ -38,7 +38,8 @@ class WithdrawalNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        $amount = $this->transaction->amount;
-        return ['message' => "واریز انجام شد\n$amount به حساب شما واریز شد."];
+        $amount = $this->transaction->amount + $this->transaction->fee;
+        return ['message' => "انتقال انجام شد\n$amount از حساب شما کسر شد."];
+
     }
 }
