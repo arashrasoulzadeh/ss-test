@@ -17,7 +17,7 @@ with following data:
 }
 
 to get top3 users in last 10 minutes with latest 10 transactions:
-GET http://localhost:8000/api/transfer
+GET http://localhost:8000/api/report
 
 ```
 
