@@ -13,7 +13,7 @@ class TransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             DB::table('transactions')->insert([
                 'source_card_id' => 1,
                 'dest_card_id' => 3,

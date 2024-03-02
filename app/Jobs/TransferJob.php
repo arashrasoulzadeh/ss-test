@@ -62,12 +62,13 @@ class TransferJob
                 $transaction = $transactionRepository->createTransaction($sourceCard->id, $destCard->id, $this->amount, $transaction_fee);
                 $sourceAccount->save();
                 $destAccount->save();
-            }
-            DB::commit();
-            FacadesNotification::send($sourceAccount->user()->first(), new WithdrawalNotification($transaction));
-            FacadesNotification::send($destAccount->user()->first(), new DepositNotification($transaction));
+                DB::commit();
+                FacadesNotification::send($sourceAccount->user()->first(), new WithdrawalNotification($transaction));
+                FacadesNotification::send($destAccount->user()->first(), new DepositNotification($transaction));
 
-            return 'done!';
+                return 'done!';
+            }
+            throw new Exception("invalid cards!");
         } catch (Exception | Throwable $e) {
             DB::rollBack();
             throw $e;

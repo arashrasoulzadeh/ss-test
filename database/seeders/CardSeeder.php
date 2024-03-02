@@ -23,11 +23,11 @@ class CardSeeder extends Seeder
         ]);
         DB::table('cards')->insert([
             'account_id' => 2,
-            'number' => '6104337465312385            '
+            'number' => '6104337465312385'
         ]);
         DB::table('cards')->insert([
             'account_id' => 2,
-            'number' => '6104337792509034            '
+            'number' => '6104337792509034'
         ]);
     }
 }

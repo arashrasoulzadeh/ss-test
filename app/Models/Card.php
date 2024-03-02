@@ -10,7 +10,7 @@ class Card extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['number'];
-    protected $with = ['account'];
+    protected $hidden = ['deleted_at', 'updated_at', 'id', 'account_id', 'created_at'];
 
     public function account()
     {

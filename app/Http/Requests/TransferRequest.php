@@ -34,7 +34,7 @@ class TransferRequest extends FormRequest
     {
         return [
             'source' => ['required', 'string', new CreditCardIsValid, 'exists:cards,number'],
-            'destination' => ['required', 'string', new CreditCardIsValid, 'exists:cards,number'],
+            'destination' => ['required', 'string', new CreditCardIsValid],
             'amount' => 'required|numeric|min:1000|max:50000000'
         ];
     }
