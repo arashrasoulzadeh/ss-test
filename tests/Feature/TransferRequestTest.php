@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class TransferReqeustTest extends TestCase
+class TransferRequestTest extends TestCase
 {
 
     public function test_source_is_valid(): void
